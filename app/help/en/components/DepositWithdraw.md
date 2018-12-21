@@ -1,6 +1,6 @@
 [# receive]
-### Receiving BTS
-In order to receive BTS from another person or from an exchange, simply give them your account name: **{account}**
+### Receiving CTS
+In order to receive CTS from another person or from an exchange, simply give them your account name: **{account}**
 
 [# deposit-short]
 ### Depositing or withdrawing coins

@@ -132,14 +132,12 @@ class FeeGroup extends React.Component {
                 if (ltm_required.indexOf(opId) < 0) {
                     if (feeTypes[key] != "Annual Membership") {
                         rows.push(
-                            <tr
-                                key={opId.toString() + key}                                
-                            >
+                            <tr key={opId.toString() + key}>
                                 {title}
                                 <td>{feeTypes[key]}</td>
                                 <td style={{textAlign: "right"}}>
                                     {assetAmount}
-                                    {amount !== 0 && preferredUnit !== "BTS" ? (
+                                    {amount !== 0 && preferredUnit !== "CTS" ? (
                                         <span>
                                             &nbsp;/&nbsp;
                                             {equivalentAmount}
@@ -150,7 +148,7 @@ class FeeGroup extends React.Component {
                                     {feeIdx !== 8 ? assetAmountLTM : null}
                                     {feeIdx !== 8 &&
                                     amount !== 0 &&
-                                    preferredUnit !== "BTS" ? (
+                                    preferredUnit !== "CTS" ? (
                                         <span>
                                             &nbsp;/&nbsp;
                                             {equivalentAmountLTM}
@@ -170,7 +168,7 @@ class FeeGroup extends React.Component {
                             </td>
                             <td style={{textAlign: "right"}}>
                                 {assetAmountLTM}
-                                {amount !== 0 && preferredUnit !== "BTS" ? (
+                                {amount !== 0 && preferredUnit !== "CTS" ? (
                                     <span>
                                         &nbsp;/&nbsp;
                                         {equivalentAmountLTM}

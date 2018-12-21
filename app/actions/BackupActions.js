@@ -13,6 +13,7 @@ class BackupActions {
                 let name = file.name;
 
                 let last_modified = new Date(file.lastModified).toString();
+                console.log("... BackupActions\ton load");
 
                 dispatch({name, contents, last_modified});
             };

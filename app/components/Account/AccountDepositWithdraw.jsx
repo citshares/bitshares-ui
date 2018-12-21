@@ -128,7 +128,7 @@ class AccountDepositWithdraw extends React.Component {
         });
     }
 
-    toggleBTService(service) {
+    toggleCTService(service) {
         this.setState({
             btService: service
         });
@@ -355,7 +355,7 @@ class AccountDepositWithdraw extends React.Component {
         });
 
         serList.push({
-            name: "XBTS (XBTSX.X)",
+            name: "XCTS (XCTSX.X)",
             template: (
                 <div className="content-block">
                     <div
@@ -421,7 +421,7 @@ class AccountDepositWithdraw extends React.Component {
                         >
                             <ul className="button-group segmented no-margin">
                                 <li
-                                    onClick={this.toggleBTService.bind(
+                                    onClick={this.toggleCTService.bind(
                                         this,
                                         "bridge"
                                     )}
@@ -607,7 +607,7 @@ class AccountDepositWithdraw extends React.Component {
             "SPARKDEX",
             "TRADE",
             "BITKAPITAL",
-            "XBTSX",
+            "XCTSX",
             "CITADEL"
         ];
         const currentServiceName = serviceNames[activeService];
@@ -808,7 +808,7 @@ export default connect(
                     []
                 ),
                 xbtsxBackedCoins: GatewayStore.getState().backedCoins.get(
-                    "XBTSX",
+                    "XCTSX",
                     []
                 ),
                 servicesDown: GatewayStore.getState().down || {}

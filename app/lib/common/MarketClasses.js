@@ -832,8 +832,8 @@ class CallOrder {
     }
 
     /*
-    * Assume a USD:BTS market
-    * The call order will always be selling BTS in order to buy USD
+    * Assume a USD:CTS market
+    * The call order will always be selling CTS in order to buy USD
     * The asset being sold is always the collateral, which is call_price.base.asset_id.
     * The amount being sold depends on how big the debt is, only enough
     * collateral will be sold to cover the debt
@@ -1306,16 +1306,11 @@ class FillOrder {
 }
 
 class CollateralBid {
-    constructor(
-        order,
-        assets,
-        market_base,
-        feed
-    ) {
-        if(!order || !assets) {
+    constructor(order, assets, market_base, feed) {
+        if (!order || !assets) {
             throw new Error("Collateral Bid missing inputs");
         }
-        
+
         this.market_base = market_base;
         this.inverted = market_base === order.inv_swan_price.base.asset_id;
 
@@ -1328,20 +1323,22 @@ class CollateralBid {
             base: new Asset({
                 asset_id: order.inv_swan_price.base.asset_id,
                 amount: parseInt(order.inv_swan_price.base.amount, 10),
-                precision:
-                    assets[order.inv_swan_price.base.asset_id].precision
+                precision: assets[order.inv_swan_price.base.asset_id].precision
             }),
             quote: new Asset({
                 asset_id: order.inv_swan_price.quote.asset_id,
                 amount: parseInt(order.inv_swan_price.quote.amount, 10),
-                precision:
-                    assets[order.inv_swan_price.quote.asset_id].precision
+                precision: assets[order.inv_swan_price.quote.asset_id].precision
             })
         });
 
         this.precisionsRatio =
-            precisionToRatio(assets[order.inv_swan_price.base.asset_id].precision) /
-            precisionToRatio(assets[order.inv_swan_price.quote.asset_id].precision);
+            precisionToRatio(
+                assets[order.inv_swan_price.base.asset_id].precision
+            ) /
+            precisionToRatio(
+                assets[order.inv_swan_price.quote.asset_id].precision
+            );
 
         if (this.inverted) this.bid = this.bid.invert();
         this.feed_price = feed;
@@ -1369,8 +1366,8 @@ class CollateralBid {
         return (
             this.collateral / // CORE
             (this.debt / // DEBT
-                this._getFeedPrice()) // DEBT/CORE
-            / 100
+                this._getFeedPrice()) / // DEBT/CORE
+            100
         );
     }
 }

@@ -337,7 +337,7 @@ class AccountPortfolioList extends React.Component {
     }
 
     _renderBuy = (symbol, canBuy, assetName, emptyCell, balance) => {
-        if (symbol === "BTS" && balance <= 100000) {
+        if (symbol === "CTS" && balance <= 100000) {
             // Precision of 5, 1 = 10^5
             return (
                 <span>
@@ -395,32 +395,36 @@ class AccountPortfolioList extends React.Component {
 
         const renderBorrow = (asset, account) => {
             let isBitAsset = asset && asset.has("bitasset_data_id");
-            let isGlobalSettled = isBitAsset && asset.getIn(["bitasset","settlement_fund"]) > 0 ? true : false;
+            let isGlobalSettled =
+                isBitAsset && asset.getIn(["bitasset", "settlement_fund"]) > 0
+                    ? true
+                    : false;
 
             return {
                 isBitAsset,
-                borrowLink: !isBitAsset || isGlobalSettled ? null : (
-                    <a
-                        onClick={() => {
-                            ReactTooltip.hide();
-                            this.showBorrowModal(
-                                asset.get("id"),
-                                asset.getIn([
-                                    "bitasset",
-                                    "options",
-                                    "short_backing_asset"
-                                ]),
-                                account
-                            );
-                        }}
-                    >
-                        <Icon
-                            name="dollar"
-                            title="icons.dollar.borrow"
-                            className="icon-14px"
-                        />
-                    </a>
-                )
+                borrowLink:
+                    !isBitAsset || isGlobalSettled ? null : (
+                        <a
+                            onClick={() => {
+                                ReactTooltip.hide();
+                                this.showBorrowModal(
+                                    asset.get("id"),
+                                    asset.getIn([
+                                        "bitasset",
+                                        "options",
+                                        "short_backing_asset"
+                                    ]),
+                                    account
+                                );
+                            }}
+                        >
+                            <Icon
+                                name="dollar"
+                                title="icons.dollar.borrow"
+                                className="icon-14px"
+                            />
+                        </a>
+                    )
             };
         };
 
@@ -506,7 +510,7 @@ class AccountPortfolioList extends React.Component {
             );
             const canDeposit =
                 (backedCoin && backedCoin.depositAllowed) ||
-                asset.get("symbol") == "BTS";
+                asset.get("symbol") == "CTS";
 
             const canWithdraw =
                 backedCoin &&
@@ -688,21 +692,26 @@ class AccountPortfolioList extends React.Component {
                     <td>{directMarketLink}</td>
                     <td>
                         {isBitAsset && borrowLink ? (
-                            <Tooltip 
+                            <Tooltip
                                 title={counterpart.translate("tooltip.borrow", {
                                     asset: isAssetBitAsset
                                         ? "bit" + symbol
-                                        : symbol}
-                                )}
+                                        : symbol
+                                })}
                             >
                                 {borrowLink}
                             </Tooltip>
-                        ) : isBitAsset && !borrowLink ? ( 
-                            <Tooltip title={counterpart.translate("tooltip.borrow_disabled",  {
-                                asset: isAssetBitAsset ? 
-                                    "bit" + symbol : 
-                                    symbol
-                            })}>
+                        ) : isBitAsset && !borrowLink ? (
+                            <Tooltip
+                                title={counterpart.translate(
+                                    "tooltip.borrow_disabled",
+                                    {
+                                        asset: isAssetBitAsset
+                                            ? "bit" + symbol
+                                            : symbol
+                                    }
+                                )}
+                            >
                                 <AntIcon type={"question-circle"} />
                             </Tooltip>
                         ) : (
@@ -828,7 +837,7 @@ class AccountPortfolioList extends React.Component {
                                 .find(
                                     a => a.backingCoin === thisAssetName[1]
                                 ) ||
-                            asset.get("symbol") == "BTS";
+                            asset.get("symbol") == "CTS";
 
                         const canBuy = !!this.props.bridgeCoins.get(
                             asset.get("symbol")

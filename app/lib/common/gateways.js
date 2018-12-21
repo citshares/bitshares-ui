@@ -89,11 +89,11 @@ export const availableGateways = {
             selected: false
         }
     },
-    XBTSX: {
-        id: "XBTSX",
-        name: "XBTSX",
+    XCTSX: {
+        id: "XCTSX",
+        name: "XCTSX",
         baseAPI: xbtsxAPIs,
-        isEnabled: allowedGateway("XBTSX"),
+        isEnabled: allowedGateway("XCTSX"),
         isSimple: true,
         selected: false,
         simpleAssetGateway: false,

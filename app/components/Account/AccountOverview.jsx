@@ -18,7 +18,7 @@ import BalanceWrapper from "./BalanceWrapper";
 import AccountTreemap from "./AccountTreemap";
 import AssetWrapper from "../Utility/AssetWrapper";
 import AccountPortfolioList from "./AccountPortfolioList";
-import {Input, Icon,Switch} from "bitshares-ui-style-guide";
+import {Input, Icon, Switch} from "bitshares-ui-style-guide";
 
 class AccountOverview extends React.Component {
     constructor(props) {
@@ -31,7 +31,7 @@ class AccountOverview extends React.Component {
             ), // alphabetical A -> B, numbers high to low
             shownAssets: props.viewSettings.get("shownAssets", "active"),
             alwaysShowAssets: [
-                "BTS"
+                "CTS"
                 // "USD",
                 // "CNY",
                 // "OPEN.BTC",
@@ -484,7 +484,13 @@ class AccountOverview extends React.Component {
                                             addonAfter={<Icon type="search" />}
                                         />
                                     </div>
-                                    <div className="selector inline-block" style={{position: "relative",top: "6px"}}>
+                                    <div
+                                        className="selector inline-block"
+                                        style={{
+                                            position: "relative",
+                                            top: "6px"
+                                        }}
+                                    >
                                         <div
                                             className={cnames("inline-block", {
                                                 inactive:

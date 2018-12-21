@@ -9,10 +9,12 @@ class WalletUnlockActions {
     unlock() {
         return dispatch => {
             return new Promise((resolve, reject) => {
+                console.log("... WalletUnlockStore\tmodal Promise");
+
                 dispatch({resolve, reject});
             })
                 .then(was_unlocked => {
-                    //DEBUG  console.log('... WalletUnlockStore\tmodal unlock')
+                    console.log("... WalletUnlockStore\tmodal unlock");
                     if (was_unlocked) WrappedWalletUnlockActions.change();
                 })
                 .catch(params => {

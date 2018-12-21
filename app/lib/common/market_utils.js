@@ -257,15 +257,15 @@ const MarketUtils = {
 
         if (order.debt) {
             if (invert) {
-                // Price in USD/BTS, amount should be in BTS, value should be in USD, debt is in USD
-                // buy is in USD, sell is in BTS
-                // quote is USD, base is BTS
+                // Price in USD/CTS, amount should be in CTS, value should be in USD, debt is in USD
+                // buy is in USD, sell is in CTS
+                // quote is USD, base is CTS
                 value = order.debt / quotePrecision;
                 amount = this.limitByPrecision(value / price.full, base);
             } else {
-                // Price in BTS/USD, amount should be in USD, value should be in BTS, debt is in USD
-                // buy is in USD, sell is in BTS
-                // quote is USD, base is BTS
+                // Price in CTS/USD, amount should be in USD, value should be in CTS, debt is in USD
+                // buy is in USD, sell is in CTS
+                // quote is USD, base is CTS
 
                 amount = this.limitByPrecision(
                     order.debt / quotePrecision,
@@ -275,7 +275,7 @@ const MarketUtils = {
             }
         } else if (!ask) {
             amount = this.limitByPrecision(
-                buy.amount / sell.amount * order.for_sale / quotePrecision,
+                ((buy.amount / sell.amount) * order.for_sale) / quotePrecision,
                 quote
             );
             value = order.for_sale / basePrecision;
