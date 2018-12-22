@@ -27,7 +27,7 @@ export function getWalletURL() {
  */
 export function getFaucet() {
     return {
-        url: "http://127.0.0.1:3000", // 2017-12-infrastructure worker proposal
+        url: "https://www.citshares.org/faucet", // 2017-12-infrastructure worker proposal
         show: true,
         editable: false
     };
