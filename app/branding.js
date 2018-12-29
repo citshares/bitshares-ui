@@ -17,7 +17,7 @@ export function getWalletName() {
  * @returns {string}
  */
 export function getWalletURL() {
-    return "https://wallet.bitshares.org";
+    return "https://www.citshares.org/";
 }
 
 /**
@@ -47,7 +47,7 @@ export function getLogo() {
  */
 export function getDefaultTheme() {
     // possible ["darkTheme", "lightTheme", "midnightTheme"]
-    return "darkTheme";
+    return "lightTheme";
 }
 
 /**
@@ -65,11 +65,7 @@ export function getDefaultLogin() {
  * @returns {[string,string,string,string,string,string]}
  */
 export function getUnits(chainId = "4018d784") {
-    if (chainId === "4018d784")
-        return ["CTS", "USD", "CNY", "BTC", "EUR", "GBP"];
-    else if (chainId === "39f5e2ed") return ["TEST"];
-    // unknown chain id: (need to return at least one unit)
-    else return ["CTS"];
+    return ["CTS", "CNY"];
 }
 
 /**
@@ -79,7 +75,7 @@ export function getUnits(chainId = "4018d784") {
  */
 
 export function getMyMarketsBases() {
-    return ["BTC", "ETH", "CTS", "USD", "CNY"];
+    return ["CTS", "CNY"];
 }
 
 /**
@@ -89,17 +85,7 @@ export function getMyMarketsBases() {
  */
 export function getMyMarketsQuotes() {
     let tokens = {
-        nativeTokens: [
-            "BTC",
-            "CTS",
-            "CNY",
-            "EUR",
-            "GOLD",
-            "KRW",
-            "RUBLE",
-            "SILVER",
-            "USD"
-        ],
+        nativeTokens: ["CTS", "CNY"],
         bridgeTokens: ["BRIDGE.BCO", "BRIDGE.BTC", "BRIDGE.MONA", "BRIDGE.ZNY"],
         gdexTokens: ["GDEX.BTC", "GDEX.BTO", "GDEX.EOS", "GDEX.ETH"],
         openledgerTokens: [
@@ -200,85 +186,7 @@ export function getMyMarketsQuotes() {
  * @returns {list of string tuples}
  */
 export function getFeaturedMarkets(quotes = []) {
-    return [
-        ["USD", "CTS"],
-        ["USD", "OPEN.BTC"],
-        ["USD", "OPEN.USDT"],
-        ["USD", "OPEN.ETH"],
-        ["USD", "OPEN.DASH"],
-        ["USD", "GOLD"],
-        ["USD", "HERO"],
-        ["USD", "GDEX.BTC"],
-        ["USD", "GDEX.ETH"],
-        ["USD", "GDEX.EOS"],
-        ["USD", "GDEX.BTO"],
-        ["USD", "OPEN.EOSDAC"],
-        ["CNY", "CTS"],
-        ["CNY", "OPEN.BTC"],
-        ["CNY", "USD"],
-        ["CNY", "OPEN.ETH"],
-        ["CNY", "YOYOW"],
-        ["CNY", "OCT"],
-        ["CNY", "GDEX.BTC"],
-        ["CNY", "GDEX.ETH"],
-        ["CNY", "GDEX.EOS"],
-        ["CNY", "GDEX.BTO"],
-        ["CNY", "GDEX.BTM"],
-        ["OPEN.BTC", "CTS"],
-        ["OPEN.BTC", "OPEN.ETH"],
-        ["OPEN.BTC", "OPEN.DASH"],
-        ["OPEN.BTC", "BLOCKPAY"],
-        ["OPEN.BTC", "OPEN.DGD"],
-        ["OPEN.BTC", "OPEN.STEEM"],
-        ["CTS", "OPEN.ETH"],
-        ["CTS", "OPEN.EOS"],
-        ["CTS", "PPY"],
-        ["CTS", "OPEN.STEEM"],
-        ["CTS", "OBITS"],
-        ["CTS", "RUBLE"],
-        ["CTS", "HERO"],
-        ["CTS", "OCT"],
-        ["CTS", "SILVER"],
-        ["CTS", "GOLD"],
-        ["CTS", "BLOCKPAY"],
-        ["CTS", "BTWTY"],
-        ["CTS", "SMOKE"],
-        ["CTS", "GDEX.BTC"],
-        ["CTS", "GDEX.ETH"],
-        ["CTS", "GDEX.EOS"],
-        ["CTS", "GDEX.BTO"],
-        ["CTS", "OPEN.EOSDAC"],
-        ["KAPITAL", "OPEN.BTC"],
-        ["USD", "OPEN.STEEM"],
-        ["USD", "OPEN.MAID"],
-        ["OPEN.USDT", "OPEN.BTC"],
-        ["OPEN.BTC", "OPEN.MAID"],
-        ["CTS", "OPEN.MAID"],
-        ["CTS", "OPEN.HEAT"],
-        ["CTS", "OPEN.INCENT"],
-        ["HEMPSWEET", "OPEN.BTC"],
-        ["KAPITAL", "CTS"],
-        ["CTS", "RUDEX.STEEM"],
-        ["USD", "RUDEX.STEEM"],
-        ["CTS", "RUDEX.SBD"],
-        ["CTS", "RUDEX.KRM"],
-        ["USD", "RUDEX.KRM"],
-        ["RUBLE", "RUDEX.GOLOS"],
-        ["CNY", "RUDEX.GOLOS"],
-        ["RUBLE", "RUDEX.GBG"],
-        ["CNY", "RUDEX.GBG"],
-        ["CTS", "RUDEX.MUSE"],
-        ["CTS", "RUDEX.TT"],
-        ["CTS", "RUDEX.SCR"],
-        ["CTS", "RUDEX.ETH"],
-        ["CTS", "RUDEX.DGB"],
-        ["CTS", "XCTSX.STH"],
-        ["CTS", "XCTSX.WAVES"],
-        ["CTS", "ZEPH"],
-        ["CTS", "HERTZ"],
-        ["CTS", "SPARKDEX.BTC"],
-        ["CTS", "SPARKDEX.ETH"]
-    ].filter(a => {
+    return [["CNY", "CTS"]].filter(a => {
         if (!quotes.length) return true;
         return quotes.indexOf(a[0]) !== -1;
     });

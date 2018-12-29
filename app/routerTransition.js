@@ -589,6 +589,12 @@ class RouterTransitioner {
         this._connectionStart = new Date().getTime();
 
         console.log("Connecting to " + this._connectionManager.url);
+        console.log("2Connecting to " + this._connectionManager.url);
+        console.log("3Connecting to " + this._connectionManager.url);
+        console.log("4Connecting to " + this._connectionManager.url);
+        console.log("5Connecting to " + this._connectionManager.url);
+        console.log("6Connecting to " + this._connectionManager.url);
+        console.log("7Connecting to " + this._connectionManager.url);
 
         if (appInit) {
             // only true if app is initialized

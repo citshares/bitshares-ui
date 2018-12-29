@@ -640,7 +640,6 @@ class AccountStore extends BaseStore {
         }
 
         if (account["toJS"]) account = account.toJS();
-
         if (account.name == "" || this.state.myActiveAccounts.get(account.name))
             return Promise.resolve();
 
