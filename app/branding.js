@@ -110,8 +110,6 @@ export function getMyMarketsQuotes() {
             "OPEN.OMG",
             "OPEN.SBD",
             "OPEN.STEEM",
-            "OPEN.TUSD",
-            "OPEN.USDT",
             "OPEN.WAVES",
             "OPEN.XMR",
             "OPEN.ZEC",
