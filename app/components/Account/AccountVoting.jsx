@@ -24,7 +24,7 @@ import {Switch} from "bitshares-ui-style-guide";
 
 class AccountVoting extends React.Component {
     static propTypes = {
-        initialBudget: ChainTypes.ChainObject.isRequired,
+        // initialBudget: ChainTypes.ChainObject.isRequired,
         globalObject: ChainTypes.ChainObject.isRequired,
         proxy: ChainTypes.ChainAccount.isRequired
     };
@@ -45,7 +45,7 @@ class AccountVoting extends React.Component {
             committee: null,
             vote_ids: Immutable.Set(),
             proxy_vote_ids: Immutable.Set(),
-            lastBudgetObject: props.initialBudget.get("id"),
+            //lastBudgetObject: props.initialBudget.get("id"),
             workerTableIndex: props.viewSettings.get("workerTableIndex", 1),
             all_witnesses: Immutable.List(),
             all_committee: Immutable.List(),
@@ -59,8 +59,8 @@ class AccountVoting extends React.Component {
 
     componentWillMount() {
         accountUtils.getFinalFeeAsset(this.props.account, "account_update");
-        ChainStore.fetchAllWorkers();
-        this.getBudgetObject();
+        //ChainStore.fetchAllWorkers();
+        //this.getBudgetObject();
     }
 
     componentDidMount() {
@@ -78,7 +78,7 @@ class AccountVoting extends React.Component {
             this.setState({prev_proxy_account_id: newState.proxy_account_id});
             this.updateAccountData(np, newState);
         }
-        this.getBudgetObject();
+        //this.getBudgetObject();
     }
 
     updateAccountData({account}, state = this.state) {
@@ -431,72 +431,72 @@ class AccountVoting extends React.Component {
         );
     }
 
-    getBudgetObject() {
-        let {lastBudgetObject} = this.state;
-        let budgetObject;
-        budgetObject = ChainStore.getObject(lastBudgetObject);
-        let idIndex = parseInt(lastBudgetObject.split(".")[2], 10);
-        if (budgetObject) {
-            let timestamp = budgetObject.get("time");
-            if (!/Z$/.test(timestamp)) {
-                timestamp += "Z";
-            }
-            let now = new Date();
+    //getBudgetObject() {
+    //    let {lastBudgetObject} = this.state;
+    //    let budgetObject;
+    //    budgetObject = ChainStore.getObject(lastBudgetObject);
+    //    let idIndex = parseInt(lastBudgetObject.split(".")[2], 10);
+    //    if (budgetObject) {
+    //        let timestamp = budgetObject.get("time");
+    //        if (!/Z$/.test(timestamp)) {
+    //            timestamp += "Z";
+    //        }
+    //        let now = new Date();
 
-            /* Use the last valid budget object to estimate the current budget object id.
-            ** Budget objects are created once per hour
-            */
-            let currentID =
-                idIndex +
-                Math.floor(
-                    (now - new Date(timestamp).getTime()) / 1000 / 60 / 60
-                ) -
-                1;
-            if (idIndex >= currentID) return;
-            let newID = "2.13." + Math.max(idIndex, currentID);
-            let newIDInt = parseInt(newID.split(".")[2], 10);
-            FetchChainObjects(
-                ChainStore.getObject,
-                [newID],
-                undefined,
-                {}
-            ).then(res => {
-                let [lbo] = res;
-                if (lbo === null) {
-                    // The object does not exist, the id was too high
-                    this.setState(
-                        {lastBudgetObject: `2.13.${newIDInt - 1}`},
-                        this.getBudgetObject
-                    );
-                } else {
-                    SettingsStore.setLastBudgetObject(newID);
+    //        /* Use the last valid budget object to estimate the current budget object id.
+    //        ** Budget objects are created once per hour
+    //        */
+    //        let currentID =
+    //            idIndex +
+    //            Math.floor(
+    //                (now - new Date(timestamp).getTime()) / 1000 / 60 / 60
+    //            ) -
+    //            1;
+    //        if (idIndex >= currentID) return;
+    //        let newID = "2.13." + Math.max(idIndex, currentID);
+    //        let newIDInt = parseInt(newID.split(".")[2], 10);
+    //        FetchChainObjects(
+    //            ChainStore.getObject,
+    //            [newID],
+    //            undefined,
+    //            {}
+    //        ).then(res => {
+    //            let [lbo] = res;
+    //            if (lbo === null) {
+    //                // The object does not exist, the id was too high
+    //                this.setState(
+    //                    {lastBudgetObject: `2.13.${newIDInt - 1}`},
+    //                    this.getBudgetObject
+    //                );
+    //            } else {
+    //                SettingsStore.setLastBudgetObject(newID);
 
-                    this.setState({lastBudgetObject: newID});
-                }
-            });
-        } else {
-            // The object does not exist, decrement the ID
-            let newID = `2.13.${idIndex - 1}`;
-            FetchChainObjects(
-                ChainStore.getObject,
-                [newID],
-                undefined,
-                {}
-            ).then(res => {
-                let [lbo] = res;
-                if (lbo === null) {
-                    // The object does not exist, the id was too high
-                    this.setState(
-                        {lastBudgetObject: `2.13.${idIndex - 2}`},
-                        this.getBudgetObject
-                    );
-                } else {
-                    SettingsStore.setLastBudgetObject(newID);
-                    this.setState({lastBudgetObject: newID});
-                }
-            });
-        }
-    }
+    //                this.setState({lastBudgetObject: newID});
+    //            }
+    //        });
+    //    } else {
+    //        // The object does not exist, decrement the ID
+    //        let newID = `2.13.${idIndex - 1}`;
+    //        FetchChainObjects(
+    //            ChainStore.getObject,
+    //            [newID],
+    //            undefined,
+    //            {}
+    //        ).then(res => {
+    //            let [lbo] = res;
+    //            if (lbo === null) {
+    //                // The object does not exist, the id was too high
+    //                this.setState(
+    //                    {lastBudgetObject: `2.13.${idIndex - 2}`},
+    //                    this.getBudgetObject
+    //                );
+    //            } else {
+    //                SettingsStore.setLastBudgetObject(newID);
+    //                this.setState({lastBudgetObject: newID});
+    //            }
+    //        });
+    //    }
+    //}
 
     _getWorkerArray() {
         let workerArray = [];
@@ -1208,7 +1208,7 @@ const BudgetObjectWrapper = props => {
     return (
         <AccountVoting
             {...props}
-            initialBudget={SettingsStore.getLastBudgetObject()}
+            //initialBudget={SettingsStore.getLastBudgetObject()}
         />
     );
 };
