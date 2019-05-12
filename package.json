@@ -1,8 +1,8 @@
 {
-    "name": "BitShares2-light",
+    "name": "CitShares2-light",
     "version": "2.0.181121-rc1",
     "description": "Advanced wallet interface for the BitShares financial blockchain.",
-    "homepage": "https://github.com/bitshares/bitshares-ui",
+    "homepage": "https://github.com/citshares/bitshares-ui",
     "author": "Sigve Kvalsvik <kvalsvik.crypto@gmail.com>",
     "contributors": [
         "James Calfee",
@@ -17,7 +17,7 @@
     },
     "repository": {
         "type": "git",
-        "url": "git://github.com/bitshares/bitshares-ui"
+        "url": "git://github.com/citshares/bitshares-ui"
     },
     "main": "build/electron/index.js",
     "scripts": {
@@ -27,9 +27,9 @@
         "profile-dev": "webpack --env.dev --env.profile --profile --json > stats-dev.json",
         "profile-build": "cross-env NODE_ENV=production webpack --env.prod --env.profile --env.hash --env.baseUrl='' --profile --json > stats-prod.json",
         "profile-nougly": "cross-env NODE_ENV=production webpack --env.prod --env.profile --env.hash --env.noUgly --profile --json > stats-prod-nougly.json",
-        "start": "cross-env NODE_ENV=development node server.js",
-        "start-perf": "cross-env NODE_ENV=development node server.js perf-dev",
-        "prestart-electron": "cross-env NODE_ENV=production webpack --env.hash --env.noUgly --env.electron --env.prod && npm run prepare-electron",
+        "start": "NODE_ENV=development node server.js",
+        "start-perf": "NODE_ENV=development node server.js perf-dev",
+        "prestart-electron": "NODE_ENV=production webpack --env.hash --env.noUgly --env.electron --env.prod && npm run prepare-electron",
         "start-electron": "electron build/electron/index.js",
         "fix-locale-files": "node ./app/assets/locales-fixup.js",
         "postfix-locale-files": "./node_modules/prettier/bin-prettier.js app/assets/locales/locale-*.json --write",
@@ -226,7 +226,7 @@
         "cross-env": "^5.0.5",
         "css-loader": "^0.28.11",
         "electron": "^2.0.13",
-        "electron-builder": "^20.31.2",
+        "electron-builder": "^20.41.0",
         "es6-promise": "^3.0.2",
         "eslint": "^4.19.0",
         "eslint-plugin-json": "^1.2.0",
@@ -247,7 +247,7 @@
         "mini-css-extract-plugin": "^0.4.0",
         "mocha": "^5.1.1",
         "node-libs-browser": "^1.0.0",
-        "node-sass": "^4.9.2",
+        "node-sass": "^4.12.0",
         "null-loader": "^0.1.1",
         "postcss-loader": "^2.1.5",
         "prettier": "^1.10.2",
@@ -260,7 +260,7 @@
         "style-loader": "^0.20.3",
         "svg-inline-loader": "^0.8.0",
         "svg-loader": "0.0.2",
-        "svgo": "^1.0.5",
+        "svgo": "^1.2.2",
         "svgo-loader": "^2.1.0",
         "uglifyjs-webpack-plugin": "^1.2.7",
         "url-loader": "^1.0.1",
