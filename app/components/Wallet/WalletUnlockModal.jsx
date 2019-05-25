@@ -191,7 +191,7 @@ class WalletUnlockModal extends React.Component {
     validate = (password, account) => {
         const {passwordLogin, resolve} = this.props;
         const {stopAskingForBackup} = this.state;
-
+        console.error("in walletunlockmodal passowrd=", password);
         const {cloudMode} = WalletDb.validatePassword(
             password || "",
             true, //unlock
@@ -263,6 +263,7 @@ class WalletUnlockModal extends React.Component {
             this.setState({passwordError: null}, () => {
                 const password = this.state.password;
                 if (!passwordLogin && backup.name) {
+                    console.error("setState 1 password=", password);
                     this.restoreBackup(password, () => this.validate(password));
                 } else {
                     if (!this.state.rememberMe) {
@@ -275,6 +276,7 @@ class WalletUnlockModal extends React.Component {
                         }
                     }
                     const account = passwordLogin ? accountName : null;
+                    console.error("setState 2 password=", password);
                     this.validate(password, account);
                 }
             });

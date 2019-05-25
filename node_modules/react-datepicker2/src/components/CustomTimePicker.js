@@ -1,0 +1,63 @@
+import React, { Component } from 'react';
+import PropTypes from "prop-types";
+import moment from 'moment';
+import TimePicker from './TimePicker';
+import { outsideClickIgnoreClass } from './DatePicker';
+import { persianNumber } from '../utils/persian';
+
+const disabledMinutes = () => {
+  return [...Array(60)].map((v, i) => i).filter(v => v % 5 !== 0);
+};
+
+export default class MyTimePicker extends Component {
+  static propTypes = {
+    momentValue: PropTypes.object,
+    setMomentValue: PropTypes.func
+  };
+
+  handleChange(value) {
+    const { momentValue, min } = this.props;
+    let newValue;
+
+    if (momentValue) {
+      newValue = momentValue.clone();
+    } else if (min && min.isAfter(moment())) {
+      newValue = min.clone();
+    } else {
+      newValue = moment(value);
+    }
+
+    newValue.hour(value.hour());
+    newValue.minute(value.minute());
+
+    this.props.setMomentValue(newValue);
+  }
+
+  render() {
+    const { momentValue } = this.props;
+
+    const timeLabel='time:';
+
+    return momentValue ? (
+      <div className={`time-picker-container`}>
+        <div className='time-label'>{timeLabel}</div>
+        <div className='time-picker-panel'>
+          <TimePicker
+            showAMPM
+            showSecond={false}
+            allowEmpty={false}
+            value={momentValue}
+            className={outsideClickIgnoreClass}
+            popupClassName={outsideClickIgnoreClass}
+            panelClassName={`${outsideClickIgnoreClass} time-picker-panel`}
+            onChange={this.handleChange.bind(this)}
+            disabledMinutes={disabledMinutes}
+            formatter={value => persianNumber(value)}
+            hideDisabledOptions
+          />
+        </div>
+        <div style={{ clear: 'both' }}></div>
+      </div>
+    ) : null;
+  }
+}

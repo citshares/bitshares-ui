@@ -78,7 +78,7 @@ class AccountLogin extends React.Component {
         const password = this.state.password;
         const account = this.state.accountName;
         this.setState({passwordError: null});
-
+        console.error("in accountlogin passowrd", password);
         WalletDb.validatePassword(
             password,
             true, // unlock

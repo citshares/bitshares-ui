@@ -386,12 +386,20 @@ class WalletDb extends BaseStore {
         account = null,
         roles = ["active", "owner", "memo"]
     ) {
+        console.error("!!!!!!!!!!enter the validatePassword");
+        console.error("account=", account);
         if (account) {
             let id = 0;
             function setKey(role, priv, pub) {
+                console.error("in setKey role=", role);
+                console.error("in setKey priv=", priv);
+                console.error("in setKey pub=", pub);
+                console.error("in setKey _passwordKey=", _passwordKey);
+
                 if (!_passwordKey) _passwordKey = {};
                 _passwordKey[pub] = priv;
 
+                console.error("in setKey _passwordKey22=", _passwordKey);
                 id++;
                 PrivateKeyStore.setPasswordLoginKey({
                     pubkey: pub,
@@ -404,16 +412,27 @@ class WalletDb extends BaseStore {
 
             /* Check if the user tried to login with a private key */
             let fromWif;
+            console.error("before check fromWif");
+            console.error("before password=", password);
             try {
                 fromWif = PrivateKey.fromWif(password);
-            } catch (err) {}
+                console.error("fromWif ", fromWif);
+                console.error("password ", password);
+            } catch (err) {
+                console.error("catch errors=", err);
+            }
             let acc = ChainStore.getAccount(account, false);
             let key;
             if (fromWif) {
-                key = {
-                    privKey: fromWif,
-                    pubKey: fromWif.toPublicKey().toString()
-                };
+                try {
+                    key = {
+                        privKey: fromWif,
+                        pubKey: fromWif.toPublicKey().toString()
+                    };
+                    console.error("in fromWit key=", key);
+                } catch (err) {
+                    console.error("catch err=", err);
+                }
             }
 
             /* Test the pubkey for each role against either the wif key, or the password generated keys */
@@ -435,6 +454,7 @@ class WalletDb extends BaseStore {
                             if (auth.get(0) === key.pubKey) {
                                 setKey(role, key.privKey, key.pubKey);
                                 foundRole = true;
+                                console.error("return false 1");
                                 return false;
                             }
                         });
@@ -451,6 +471,7 @@ class WalletDb extends BaseStore {
                                             key.pubKey
                                         );
                                         foundRole = true;
+                                        console.error("return false 2");
                                         return false;
                                     }
                                 }
@@ -460,6 +481,7 @@ class WalletDb extends BaseStore {
                 }
             });
 
+            console.error("_passwordKey ", _passwordKey);
             /* If the unlock fails and the user has a wallet, check the password against the wallet as well */
             if (!_passwordKey && !!this.state.wallet) {
                 let {success, cloudMode} = this.validatePassword(
@@ -477,15 +499,18 @@ class WalletDb extends BaseStore {
                     return {success: true, cloudMode: false};
                 }
             }
-
+            console.error("last _passwordKey=", _passwordKey);
             return {success: !!_passwordKey, cloudMode: true};
         } else {
+            console.error("if account enter else");
             let wallet = this.state.wallet;
             try {
                 let password_private = PrivateKey.fromSeed(password);
                 let password_pubkey = password_private
                     .toPublicKey()
                     .toPublicKeyString();
+                console.error("wallet = ", wallet.password_pubkey);
+                console.error("password_pubkey= ", password_pubkey);
                 if (wallet.password_pubkey !== password_pubkey) return false;
                 if (unlock) {
                     let password_aes = Aes.fromSeed(password);
