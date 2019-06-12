@@ -381,10 +381,14 @@ class MarketsStore {
                         this.is_prediction_market
                     );
                     if (callOrder.isMarginCalled()) {
-                        this.marketCallOrders = this.marketCallOrders.set(
-                            call.id,
-                            callOrder
-                        );
+                        console.log("#################### call.id ",call.id)
+                        console.log("#################### callOrder.borrower ", callOrder.borrower)
+                        if (callOrder.borrower != "1.2.0") {
+                            this.marketCallOrders = this.marketCallOrders.set(
+                                call.id,
+                                callOrder
+                            );
+                        }
                     }
                 } catch (err) {
                     console.error(
@@ -582,10 +586,14 @@ class MarketsStore {
                     // console.log("**** onCallOrderUpdate **", call_order, "isMarginCalled:", callOrder.isMarginCalled());
 
                     if (callOrder.isMarginCalled()) {
-                        this.marketCallOrders = this.marketCallOrders.set(
-                            call_order.id,
-                            callOrder
-                        );
+                        console.log("22222222222 call.id ",call.id)
+                        console.log("22222222222 callOrder.borrower ", callOrder.borrower)
+                        if (callOrder.borrower != "1.2.0") {
+                            this.marketCallOrders = this.marketCallOrders.set(
+                                call_order.id,
+                                callOrder
+                            );
+                        }
 
                         // Update orderbook
                         this._orderBook(false, true);
@@ -1031,6 +1039,9 @@ class MarketsStore {
 
     constructCalls(callsArray) {
         let calls = [];
+    console.log("### callsArray ", callsArray.toJS())
+    
+
         if (callsArray.size) {
             calls = callsArray
                 .sort((a, b) => {

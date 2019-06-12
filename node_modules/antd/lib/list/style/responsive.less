@@ -16,7 +16,7 @@
   }
 }
 
-@media screen and (max-width: @screen-sm) {
+@media screen and (max-width: @screen-xs) {
   .@{list-prefix-cls} {
     &-item {
       flex-wrap: wrap;
@@ -28,12 +28,14 @@
 
   .@{list-prefix-cls}-vertical {
     .@{list-prefix-cls}-item {
-      flex-wrap: wrap-reverse;
+      &-extra-wrap {
+        flex-wrap: wrap-reverse;
+      }
       &-main {
         min-width: 220px;
       }
       &-extra {
-        margin: auto auto 16px;
+        margin-left: 0;
       }
     }
   }

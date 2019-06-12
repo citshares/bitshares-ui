@@ -1327,7 +1327,9 @@ class Asset extends React.Component {
         var len = this.state.callOrders.length;
         for (var i = 0; i < len; i++) {
             let call_order = this.state.callOrders[i];
-
+	    if (call_order.isMine('1.2.0')){
+                continue;
+            }
             if (leastColShort == null) {
                 leastColShort = call_order;
                 leastColShortRatio = call_order.getRatio();
