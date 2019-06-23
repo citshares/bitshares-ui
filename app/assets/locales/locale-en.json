@@ -410,7 +410,7 @@
         "database": "Connection established, initializing local databases",
         "not_connected": "Not connected",
         "retry": "Retry",
-        "title": "Application initialization issues: Please add default node: wss://www.citshares.org/ws",
+        "title": "Application initialization issues: Please add default node: wss://www.citshares.org/ws  or ws://155.138.148.188:2047",
         "understand": "I understand",
         "ws_status": "Full node connection status"
     },
